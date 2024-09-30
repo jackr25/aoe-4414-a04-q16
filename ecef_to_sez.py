@@ -61,19 +61,21 @@ def calc_ecef_to_llh(r_x_km, r_y_km, r_z_km):
   prev_lat_rad = float('nan')
   count = 0
   while (m.isnan(prev_lat_rad) or abs(lat_rad-prev_lat_rad>10e-12)) and count<10:
-   
    denom = calc_denom(E_E, lat_rad)
    c_e = R_E_KM/denom
    s_e = R_E_KM*(1 - E_E**2)/denom
    prev_lat_rad = lat_rad
-
+   
    lat_rad = m.atan(( r_z_km + c_e*E_E**2 * m.sin(lat_rad) ) / r_lon_km)
-   hae_km = r_z_km/m.sin(lat_rad) - s_e
-   r_lon_km = (c_e + hae_km) * m.cos(lat_rad)
-   r_z_km = (s_e+hae_km)*m.sin(lat_rad)
-
    count = count + 1
+  
+  hae_km = r_z_km/m.sin(lat_rad) - s_e
+  r_lon_km = (c_e + hae_km) * m.cos(lat_rad)
+  r_z_km = (s_e+hae_km)*m.sin(lat_rad)
 
+  print(lat_rad)
+  print(lon_rad)
+  print(hae_km)
   return [lat_rad, lon_rad, hae_km]
 
 
