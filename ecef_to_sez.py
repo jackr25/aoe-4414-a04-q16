@@ -73,9 +73,6 @@ def calc_ecef_to_llh(r_x_km, r_y_km, r_z_km):
   r_lon_km = (c_e + hae_km) * m.cos(lat_rad)
   r_z_km = (s_e+hae_km)*m.sin(lat_rad)
 
-  print(lat_rad)
-  print(lon_rad)
-  print(hae_km)
   return [lat_rad, lon_rad, hae_km]
 
 
